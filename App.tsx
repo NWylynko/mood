@@ -5,6 +5,7 @@ import { Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import styled from "styled-components/native";
 import Slider from "@react-native-community/slider";
+import "./src/firebase";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -31,9 +32,9 @@ function Home() {
       romantic,
       motivated,
       sad,
-      moody
-    })
-  }
+      moody,
+    });
+  };
 
   return (
     <Container>
@@ -51,7 +52,13 @@ function Home() {
   );
 }
 
-function CustomSlider({ colour, setValue }: { colour: string, setValue: (n: number) => void}) {
+function CustomSlider({
+  colour,
+  setValue,
+}: {
+  colour: string;
+  setValue: (n: number) => void;
+}) {
   return (
     <Slider
       style={{ width: 200, height: 40 }}
