@@ -20,8 +20,19 @@ export default firebase;
 
 const firestore = firebase.firestore()
 
-export const addEntry = (fields: any) => firestore
-  .collection('users')
-  .doc(firebase.auth().currentUser?.uid)
-  .collection('mood_data')
-  .add({...fields, timestamp: Date.now()});
+export const addEntry = async (fields: any) => {
+
+  const timestamp = Date.now()
+
+  const user_db = firestore
+    .collection('users')
+    .doc(firebase.auth().currentUser?.uid)
+
+  await user_db
+    .collection('mood_data')
+    .add({...fields, timestamp})
+
+  await user_db
+    .set({ timestamp })
+    
+}
