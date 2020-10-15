@@ -1,6 +1,6 @@
 import firebase from "firebase/app"
 import "@firebase/auth";
-import "@firebase/storage";
+import "@firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuI7iuaj9D7Ad2yO9GTrL5Fn68P6S-yoY",
@@ -17,3 +17,11 @@ if (!firebase.apps.length) {
 }
 
 export default firebase;
+
+const firestore = firebase.firestore()
+
+export const addEntry = (fields: any) => firestore
+  .collection('users')
+  .doc(firebase.auth().currentUser?.uid)
+  .collection('mood_data')
+  .add({...fields, timestamp: Date.now()});

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Text, Button, View } from "react-native";
 import styled from "styled-components/native";
 import { CustomSlider } from "./CustomSlider";
+import { addEntry } from './firebase'
 
 export function Home() {
   const [romantic, setRomantic] = useState(0);
@@ -14,11 +15,14 @@ export function Home() {
   const [bored, setBored] = useState(0);
 
   const send = () => {
-    console.log({
+    addEntry({
       romantic,
       motivated,
       sad,
       moody,
+      happy,
+      unmotivated,
+      bored
     });
   };
 
