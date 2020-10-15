@@ -1,6 +1,7 @@
 import firebase from "firebase/app"
 import "@firebase/auth";
 import "@firebase/firestore";
+import { DocumentData } from "@firebase/firestore-types"
 
 const firebaseConfig = {
   apiKey: "AIzaSyDuI7iuaj9D7Ad2yO9GTrL5Fn68P6S-yoY",
@@ -35,4 +36,16 @@ export const addEntry = async (fields: any) => {
   await user_db
     .set({ timestamp })
     
+}
+
+export const getTimestamp = async (): Promise<number> => {
+  const user_db = firestore
+    .collection('users')
+    .doc(firebase.auth().currentUser?.uid)
+
+  const response = await user_db.get()
+
+  const { timestamp } = response.data() || { timestamp: 0 }
+
+  return timestamp
 }

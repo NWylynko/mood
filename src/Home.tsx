@@ -1,9 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { Text, Button, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, Button, View, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { CustomSlider } from "./CustomSlider";
-import { addEntry } from './firebase'
+import { addEntry, getTimestamp } from "./firebase";
 
 export function Home() {
   const [romantic, setRomantic] = useState(0);
@@ -14,7 +14,11 @@ export function Home() {
   const [unmotivated, setUnmotivated] = useState(0);
   const [bored, setBored] = useState(0);
 
+  const [sending, setSending] = useState(false);
+  const [done, setDone] = useState(false);
+
   const send = () => {
+    setSending(true)
     addEntry({
       romantic,
       motivated,
@@ -22,13 +26,14 @@ export function Home() {
       moody,
       happy,
       unmotivated,
-      bored
-    });
+      bored,
+    }).then(() => { setDone(true); setSending(false); });
   };
 
   return (
     <Container>
       <StatusBar style="auto" />
+      <TimeToday />
       <Text>Romantic: {romantic}</Text>
       <CustomSlider colour="#e660e1" setValue={setRomantic} />
       <Text>Motivated: {motivated}</Text>
@@ -43,15 +48,60 @@ export function Home() {
       <CustomSlider colour="#44cf54" setValue={setUnmotivated} />
       <Text>Bored: {bored}</Text>
       <CustomSlider colour="#8a8a8a" setValue={setBored} />
-      <Button title="Send!" onPress={send} />
+      {sending ? <ActivityIndicator /> : done ? <Text>Thanks xx</Text> :<Button title="Send!" onPress={send} />}
     </Container>
   );
 }
+
+const TimeToday = () => {
+  const [doneToday, setDoneToday] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const effect = async () => {
+      const timestamp = await getTimestamp();
+
+      const today = new Date().setHours(0, 0, 0, 0);
+      const thatDay = new Date(timestamp).setHours(0, 0, 0, 0);
+
+      return today === thatDay;
+    };
+    effect().then((done) => {
+      setDoneToday(done);
+      setLoading(false);
+    });
+  }, []);
+
+  return (
+    <WarningBox>
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : doneToday ? (
+        <>
+          <Text>You've already done it today,</Text>
+          <Text>Feel free to do it again :)</Text>
+        </>
+      ) : (
+        <>
+          <Text>Welcome back,</Text>
+          <Text>I hope you've had a wonderful day!</Text>
+        </>
+      )}
+    </WarningBox>
+  );
+};
+
+const WarningBox = styled(View)`
+  margin: 10px;
+  min-height: 40px;
+  text-align: center;
+`;
 
 export const Container = styled(View)`
   flex: 1;
   background-color: #fff;
   align-items: center;
   justify-content: space-evenly;
-  padding: 50px;
+  padding: 15px;
+  padding-bottom: 50px;
 `;

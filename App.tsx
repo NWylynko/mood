@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import firebase from "./src/firebase";
+import firebase, { getTimestamp } from "./src/firebase";
 import React, { useEffect, useState } from "react";
 import { Text } from "react-native"
 
@@ -17,7 +17,7 @@ export default function App() {
   const [user, setUser] = useState<firebase.User | null>()
 
   useEffect(() => {
-    const unListen = firebase.auth().onAuthStateChanged((newUser) => { setUser(newUser); setLoading(false) });
+    const unListen = firebase.auth().onAuthStateChanged((newUser) => { setUser(newUser); setLoading(false); });
 
     return unListen
   }, [])
