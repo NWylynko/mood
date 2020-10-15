@@ -19,7 +19,7 @@ if (!firebase.apps.length) {
 
 export default firebase;
 
-const firestore = firebase.firestore()
+export const firestore = firebase.firestore()
 
 export const addEntry = async (fields: any) => {
 

@@ -1,9 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Text, Button, View, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { CustomSlider } from "./CustomSlider";
 import { addEntry, getTimestamp } from "./firebase";
+import { useNavigation } from "@react-navigation/native";
+
 
 export function Home() {
   const [romantic, setRomantic] = useState(0);
@@ -17,8 +19,23 @@ export function Home() {
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
 
+  const navigation = useNavigation()
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{ margin: 10 }}>
+          <Button
+            onPress={() => navigation.navigate("Graphs")}
+            title="Graphs"
+          />
+        </View>
+      ),
+    });
+  }, [navigation]);
+
   const send = () => {
-    setSending(true)
+    setSending(true);
     addEntry({
       romantic,
       motivated,
@@ -27,7 +44,10 @@ export function Home() {
       happy,
       unmotivated,
       bored,
-    }).then(() => { setDone(true); setSending(false); });
+    }).then(() => {
+      setDone(true);
+      setSending(false);
+    });
   };
 
   return (
@@ -48,7 +68,13 @@ export function Home() {
       <CustomSlider colour="#44cf54" setValue={setUnmotivated} />
       <Text>Bored: {bored}</Text>
       <CustomSlider colour="#8a8a8a" setValue={setBored} />
-      {sending ? <ActivityIndicator /> : done ? <Text>Thanks xx</Text> :<Button title="Send!" onPress={send} />}
+      {sending ? (
+        <ActivityIndicator />
+      ) : done ? (
+        <Text>Thanks xx</Text>
+      ) : (
+        <Button title="Send!" onPress={send} />
+      )}
     </Container>
   );
 }
