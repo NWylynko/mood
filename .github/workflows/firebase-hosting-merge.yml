@@ -17,13 +17,16 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: '14.x'
+      
+      - name: Install expo
+        run: yarn global add expo-cli
 
       - name: Install Dependencies
         run: yarn install
 
       - name: Build
-        run: yarn expo build:web
-        
+        run: expo build:web
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'

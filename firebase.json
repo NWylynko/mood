@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "moodyy",
     "public": "web-build",
     "ignore": [
       "firebase.json",
