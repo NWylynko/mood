@@ -19,7 +19,7 @@ jobs:
           node-version: '14.x'
       
       - name: Install expo
-        run: yarn global add expo-cli
+        run: npm i -g expo-cli
 
       - name: Install Dependencies
         run: yarn install
