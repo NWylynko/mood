@@ -8,7 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import { Home, Container } from "./src/Home";
 import { Login } from "./src/login";
-import { Graphs } from "./src/graphs";
+import { Graphs } from "./src/Graphs";
 
 const Stack = createStackNavigator();
 
