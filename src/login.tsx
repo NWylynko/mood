@@ -3,7 +3,9 @@ import * as WebBrowser from 'expo-web-browser';
 import { ResponseType } from 'expo-auth-session';
 import * as Google from 'expo-auth-session/providers/google';
 import firebase from './firebase';
-import { Button } from 'react-native';
+import { Button, Image, TouchableOpacity } from 'react-native';
+
+import { Container } from './Home'
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -25,12 +27,20 @@ export function Login() {
   }, [response]);
 
   return (
-    <Button
-      disabled={!request}
-      title="Login With Google"
-      onPress={() => {
-        promptAsync();
-        }}
-    />
+    <Container>
+      <Button
+        disabled={!request}
+        title="Login With Google"
+        onPress={() => {
+          promptAsync();
+          }}
+      />
+      <TouchableOpacity onPress={() => { promptAsync(); } } disabled={!request}>
+        <Image 
+          source={{ uri: "https://img.shields.io/badge/Login%20With%20Google%20-%234285F4.svg?&style=for-the-badge&logo=Google&logoColor=white" }}
+          />
+      </TouchableOpacity>
+    </Container>
+
   );
 }
