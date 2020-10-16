@@ -9,6 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Home, Container } from "./src/Home";
 import { Login } from "./src/login";
 import { Graphs } from "./src/Graphs";
+import { Settings } from './src/Settings'
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,7 @@ function App() {
         <>
           <Stack.Screen name="Mood" component={Home} />
           <Stack.Screen name="Graphs" component={Graphs} />
+          <Stack.Screen name="Settings" component={Settings} />
         </>
       ) : (
         <Stack.Screen name="Login" component={Login} />

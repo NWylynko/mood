@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 import { CustomSlider } from "./CustomSlider";
 import { addEntry, getTimestamp } from "./firebase";
 import { useNavigation } from "@react-navigation/native";
+import { Feather } from '@expo/vector-icons';
 
 
 export function Home() {
@@ -31,6 +32,15 @@ export function Home() {
           />
         </View>
       ),
+      headerLeft: () => (
+        <View style={{ margin: 10 }}>
+          <Feather 
+            name="menu" 
+            size={28} 
+            onPress={() => navigation.navigate("Settings")}
+          />
+        </View>
+      )
     });
   }, [navigation]);
 
