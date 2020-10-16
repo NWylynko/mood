@@ -3,21 +3,40 @@ import * as WebBrowser from "expo-web-browser";
 import { ResponseType } from "expo-auth-session";
 import * as Google from "expo-auth-session/providers/google";
 import firebase from "./firebase";
-import { Button, Image, TouchableOpacity, Text } from "react-native";
+import { Button, Image, TouchableOpacity, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Container } from "./Home";
+import styled from "styled-components/native";
 
 WebBrowser.maybeCompleteAuthSession();
 
 export function Login() {
+
+  const navigation = useNavigation()
+  
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View style={{ margin: 10 }}>
+          <AnonymousLogin />
+        </View>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <Container style={{ height: 400 }} >
-      <Text>Please login</Text>
+      <Title>Mood</Title>
       <GoogleLogin />
-      <AnonymousLogin />
     </Container>
   );
 }
+
+const Title = styled(Text)`
+  font-size: 32px;
+  font-weight: 600;
+`;
 
 const AnonymousLogin = () => {
 
@@ -26,7 +45,7 @@ const AnonymousLogin = () => {
   }
 
   return (
-    <Button title="Login Later" onPress={onPress} />
+    <Button title="Later" onPress={onPress} />
   )
 }
 
