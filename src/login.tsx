@@ -37,7 +37,7 @@ export function Login() {
       />
       <TouchableOpacity onPress={() => { promptAsync(); } } disabled={!request}>
         <Image 
-          source={{ uri: "https://img.shields.io/badge/Login%20With%20Google%20-%234285F4.svg?&style=for-the-badge&logo=Google&logoColor=white" }}
+          source={{ uri: "https://img.shields.io/badge/Login%20With%20Google%20-%234285F4.png?&style=for-the-badge&logo=Google&logoColor=white" }}
           />
       </TouchableOpacity>
     </Container>
