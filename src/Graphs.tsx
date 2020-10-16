@@ -17,7 +17,7 @@ export function Graphs() {
   const [sad, setSad] = useState<number[]>([]);
   const [moody, setMoody] = useState<number[]>([]);
   const [happy, setHappy] = useState<number[]>([]);
-  const [unmotivated, setUnmotivated] = useState<number[]>([]);
+  const [anxious, setAnxious] = useState<number[]>([]);
   const [bored, setBored] = useState<number[]>([]);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function Graphs() {
           setSad(state => [...state, data.sad])
           setMoody(state => [...state, data.moody])
           setHappy(state => [...state, data.happy])
-          setUnmotivated(state => [...state, data.unmotivated])
+          setAnxious(state => [...state, data.unmotivated])
           setBored(state => [...state, data.bored])
         })
 
@@ -64,8 +64,8 @@ export function Graphs() {
       <Chart data={moody} labels={labels} colour="#ba62e3" />
       <Text>Happy</Text>
       <Chart data={happy} labels={labels} colour="#f0de54" />
-      <Text>Unmotivated</Text>
-      <Chart data={unmotivated} labels={labels} colour="#44cf54" />
+      <Text>Anxious</Text>
+      <Chart data={anxious} labels={labels} colour="#44cf54" />
       <Text>Bored</Text>
       <Chart data={bored} labels={labels} colour="#8a8a8a" />
     </View>

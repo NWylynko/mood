@@ -13,7 +13,7 @@ export function Home() {
   const [sad, setSad] = useState(0);
   const [moody, setMoody] = useState(0);
   const [happy, setHappy] = useState(0);
-  const [unmotivated, setUnmotivated] = useState(0);
+  const [anxious, setAnxious] = useState(0);
   const [bored, setBored] = useState(0);
 
   const [sending, setSending] = useState(false);
@@ -42,7 +42,7 @@ export function Home() {
       sad,
       moody,
       happy,
-      unmotivated,
+      anxious,
       bored,
     }).then(() => {
       setDone(true);
@@ -64,8 +64,8 @@ export function Home() {
       <CustomSlider colour="#ba62e3" setValue={setMoody} />
       <Text>Happy: {happy}</Text>
       <CustomSlider colour="#f0de54" setValue={setHappy} />
-      <Text>Unmotivated: {unmotivated}</Text>
-      <CustomSlider colour="#44cf54" setValue={setUnmotivated} />
+      <Text>Anxious: {anxious}</Text>
+      <CustomSlider colour="#44cf54" setValue={setAnxious} />
       <Text>Bored: {bored}</Text>
       <CustomSlider colour="#8a8a8a" setValue={setBored} />
       {sending ? (
