@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Text, Button, View, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
@@ -60,9 +59,27 @@ export function Home() {
     });
   };
 
+  if (sending) {
+    return (
+      <Container>
+        <ActivityIndicator />
+      </Container>
+    )
+  }
+
+  if (done) {
+    return (
+      <Container>
+        <View style={{ alignItems: 'center' }}>
+          <Text>Thanks</Text>
+          <Text>Come back tomorrow to record how your feeling</Text>
+        </View>
+      </Container>
+    )
+  }
+
   return (
     <Container>
-      <StatusBar style="auto" />
       <TimeToday />
       <Text>Romantic: {romantic}</Text>
       <CustomSlider colour="#e660e1" setValue={setRomantic} />
@@ -78,13 +95,7 @@ export function Home() {
       <CustomSlider colour="#44cf54" setValue={setUnmotivated} />
       <Text>Bored: {bored}</Text>
       <CustomSlider colour="#8a8a8a" setValue={setBored} />
-      {sending ? (
-        <ActivityIndicator />
-      ) : done ? (
-        <Text>Thanks xx</Text>
-      ) : (
-        <Button title="Send!" onPress={send} />
-      )}
+      <Button title="Send" onPress={send} />
     </Container>
   );
 }
@@ -111,7 +122,7 @@ const TimeToday = () => {
   return (
     <WarningBox>
       {loading ? (
-        <Text>Loading...</Text>
+        <ActivityIndicator />
       ) : doneToday ? (
         <>
           <Text>You've already done it today,</Text>
