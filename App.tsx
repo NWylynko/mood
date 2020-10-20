@@ -2,6 +2,7 @@ import "react-native-gesture-handler";
 import firebase from "./src/firebase";
 import React, { useEffect, useState } from "react";
 import { Text, Button, View } from "react-native";
+import { AppLoading } from 'expo';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -37,9 +38,7 @@ function App() {
 
   if (loading) {
     return (
-      <Container>
-        <Text>Loading...</Text>
-      </Container>
+      <AppLoading />
     );
   }
 

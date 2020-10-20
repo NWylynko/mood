@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, Text, Dimensions } from "react-native";
+import { Button, View, Text, Dimensions, ActivityIndicator } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import firebase, {firestore} from "./firebase"
 import HowLongAgo from '@nwylynko/how-long-ago'
@@ -47,7 +47,7 @@ export function Graphs() {
   }, [])
 
   if (loading) {
-    return <Container><Text>Loading...</Text></Container>
+    return <Container><ActivityIndicator /></Container>
   }
 
   return (
