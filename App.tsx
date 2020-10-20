@@ -10,6 +10,7 @@ import { Home, Container } from "./src/Home";
 import { Login } from "./src/login";
 import { Graphs } from "./src/Graphs";
 import { Settings } from './src/Settings'
+import { User } from './src/User'
 
 const Stack = createStackNavigator();
 
@@ -49,6 +50,7 @@ function App() {
           <Stack.Screen name="Mood" component={Home} />
           <Stack.Screen name="Graphs" component={Graphs} />
           <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="User" component={User} />
         </>
       ) : (
         <Stack.Screen name="Login" component={Login} />
