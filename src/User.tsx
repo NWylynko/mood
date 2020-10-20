@@ -9,7 +9,7 @@ export function User() {
   return (
     <Container>
       <Text></Text>
-      <Button title="Logout" color="#de220d" onPress={() => { firebase.auth().signOut(); navigation.navigate("Login") }} />
+      <Button title="Logout" color="#de220d" onPress={() => { firebase.auth().signOut(); }} />
     </Container>
   );
 }
